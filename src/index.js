@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import { createGlobalStyle } from 'styled-components';
 import ModalLoading from 'components/modal/ModalLoading';
+import App from './App';
 
 
-// import App from './App';
-const App = React.lazy(() => {
-  return new Promise(resolve => setTimeout(resolve,2000))
-                      .then(() => import('./App'))
-  }
-)
+// const App = React.lazy(() => {
+//   return new Promise(resolve => setTimeout(resolve,2000))
+//                       .then(() => import('./App'))
+//   }
+// )
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -23,9 +23,9 @@ const GlobalStyle = createGlobalStyle`
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
-    <Suspense maxDuration={300} fallback={<ModalLoading />}>
+    {/* <Suspense maxDuration={300} fallback={<ModalLoading />}> */}
       <App />
-    </Suspense>
+    {/* </Suspense> */}
     <GlobalStyle />
   </>
 );

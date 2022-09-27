@@ -87,7 +87,7 @@ const TextStonk = styled.span`
 
 function App() {
   const [height, setHeight] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
   const textStokeRef = useRef()
 
   useEffect(() => {
@@ -95,28 +95,38 @@ function App() {
       setHeight(prev => window.innerHeight)
     })
 
+    const _count_down_loading = setTimeout(() => {
+      setIsLoading(false)
+    }, 1500);
+
+
+    return () => clearTimeout(_count_down_loading)
   }, [])
 
   return (
     <>
-      <Container >
-        <Nabbar />
-        <WrapSection>
-          <WrapContent>
-            <WrapText>
-              <BoxLine />
-              <TextTitle><TextStonk ref={textStokeRef}>Phayu</TextStonk>phat <br />Trilao</TextTitle>
-              <TextBody>junior front end developer <br />
-                Contrary to popular belief, Lorem Ipsum is not simpsssssssss
-                Contrary to popular belief, Lorem Ipsum is not simpsssssssss
-                Contrary to popular belief, Lorem Ipsum is not simpsssssssss
-                Contrary to popular belief, Lorem Ipsum is not simpsssssssss
-                </TextBody>
-            </WrapText>
-            <WrapperImage><Image alt='image introdul' loading='lazy' src={Post} /></WrapperImage>
-          </WrapContent>
-        </WrapSection>
-      </Container>
+      <ModalLoading status={isLoading}   />
+      {
+        !isLoading  &&
+        <Container >
+          <Nabbar />
+          <WrapSection>
+            <WrapContent>
+              <WrapText>
+                <BoxLine />
+                <TextTitle><TextStonk ref={textStokeRef}>Phayu</TextStonk>phat <br />Trilao</TextTitle>
+                <TextBody>junior front end developer <br />
+                  Contrary to popular belief, Lorem Ipsum is not simpsssssssss
+                  Contrary to popular belief, Lorem Ipsum is not simpsssssssss
+                  Contrary to popular belief, Lorem Ipsum is not simpsssssssss
+                  Contrary to popular belief, Lorem Ipsum is not simpsssssssss
+                  </TextBody>
+              </WrapText>
+              <WrapperImage><Image alt='image introdul' loading='lazy' src={Post} /></WrapperImage>
+            </WrapContent>
+          </WrapSection>
+        </Container>
+      }
     </>
   );
 }
